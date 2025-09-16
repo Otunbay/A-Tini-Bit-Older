@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>She’s a Tini Bit Older 🎂✨</title>
+  <meta name="description" content="Fancy birthday website with wishes, photo gallery, downloads, menu, countdown, music, confetti, and playful theme." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root{
+      --gold: #F5C451;
+      --rose: #F7B2D9;
+      --ink: #111113;
+      --glass: rgba(61, 50, 50, 0.893);
+    }
+    html, body { scroll-behavior: smooth; }
+    body { font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Liberation Sans', sans-serif; }
+    .fancy { font-family: 'Great Vibes', cursive; }
+    /* Glassmorphism */
+    .glass { backdrop-filter: blur(12px); background: linear-gradient(180deg, rgba(247, 139, 24, 0.616), rgba(213, 106, 215, 0.214)); border: 1px solid rgba(207, 77, 240, 0.43); }
+    /* Sparkle cursor */
+    .sparkle { position: fixed; width: 8px; height: 8px; pointer-events: none; border-radius: 9999px; box-shadow: 0 0 10px var(--gold), 0 0 20px var(--gold); opacity: .9; }
+    /* Floating balloons */
+    .balloon{ position: absolute; bottom: -10vh; animation: rise 14s linear infinite; filter: drop-shadow(0 8px 18px rgba(28, 24, 27, 0.108)); }
+    @keyframes rise { from{ transform: translateY(0) translateX(0);} to{ transform: translateY(-120vh) translateX(15px);} }
+    /* Lightbox */
+    .lightbox-open { overflow: hidden; }
+    .fade-in { animation: fade .5s ease both; }
+    @keyframes fade { from{ opacity:0; transform: scale(.98);} to{ opacity:1; transform: scale(1);} }
+  </style>
+</head>
+<body class="min-h-screen bg-[radial-gradient(1500px_800px_at_10%_-10%,#2b193f_0%,#141018_40%,#0A0A0C_100%)] text-white relative">
+
+  <!-- Confetti Canvas & Cursor Layer -->
+  <canvas id="confetti" class="fixed inset-0 pointer-events-none z-50"></canvas>
+  <div id="sparkles" class="fixed inset-0 pointer-events-none z-50"></div>
+
+  <!-- Floating Balloons (decor) -->
+  <div id="balloons" class="pointer-events-none fixed inset-0 -z-0"></div>
+
+  <!-- Navbar -->
+<header class="sticky top-0 z-40">
+  <nav class="glass bg-white/5 backdrop-blur px-4 md:px-8 py-3 flex items-center justify-between">
+    <!-- Logo -->
+    <a href="index.html" class="flex items-center gap-3">
+      <span class="text-2xl fancy text-[var(--gold)]">Her Day</span>
+      <span class="hidden md:block text-xs tracking-widest uppercase text-white/70">She’s a Tini Bit Older</span>
+    </a>
+
+    <!-- Hamburger (mobile only) -->
+    <span class="hamburger md:hidden text-[var(--gold)] text-3xl cursor-pointer" onclick="toggleMenu()">☰</span>
+
+    <!-- Links -->
+    <ul id="navLinks" class="hidden md:flex flex-col md:flex-row md:items-center gap-6 text-white/80 text-sm absolute md:static top-[60px] right-4 md:top-auto md:right-auto bg-[var(--glass)] md:bg-transparent rounded-lg md:rounded-none p-5 md:p-0 w-48 md:w-auto">
+      <li><a href="wishes.html" class="block py-2 hover:text-[var(--gold)]">Wish</a></li>
+      <li><a href="photo.html" class="block py-2 hover:text-[var(--gold)]">Photos</a></li>
+      <li><a href="menu.html" class="block py-2 hover:text-[var(--gold)]">Menu</a></li>
+      <li><button id="musicBtn" class="rounded-full px-3 py-1.8 bg-white/10 hover:bg-white/20 transition"><li><a href="index.html" target="mainFrame" class="block py-2 hover:text-[var(--gold)]">Music</a></li>
+      </ul></button></li>
+    </ul>
+  </nav>
+</header>
+
+<script>
+  function toggleMenu() {
+    document.getElementById("navLinks").classList.toggle("hidden");
+  }
+</script>
+
+    <!-- Hero -->
+  <section id="home" class="relative overflow-hidden">
+    <div class="max-w-6xl mx-auto px-4 md:px-8">
+      <div class="py-16 md:py-24 grid md:grid-cols-2 items-center gap-10">
+        <div>
+          <h1 class="text-5xl md:text-7xl font-extrabold leading-tight">
+            <span class="fancy text-[var(--gold)] block mb-3">Happy Birthday</span>
+            She’s just a <span class="text-[var(--rose)]">Tini bit older</span> ✨
+          </h1>
+          <p class="mt-5 text-white/80 text-lg md:text-xl">Still fabulous, timeless, and unforgettable. Celebrate with wishes, memories, and treats below.</p>
+          <div class="mt-8 flex flex-wrap items-center gap-4">
+            <a href="Untitled-29.html" class="rounded-2xl px-6 py-3 bg-gradient-to-r from-[var(--rose)] to-[var(--gold)] text-ink font-semibold shadow-lg shadow-[rgba(245,196,81,.35)] hover:scale-[1.02] transition">Leave a Wish</a>
+            <a href="Untitled-1.html" class="rounded-2xl px-6 py-3 bg-white/10 hover:bg-white/20 transition">View Photos</a>
+          </div>
+          <!-- Countdown -->
+          <div class="mt-10 glass rounded-3xl p-5 inline-flex items-center gap-6">
+            <div>
+              <p class="text-xs uppercase tracking-widest text-white/70">Countdown to Party</p>
+              <div id="countdown" class="text-3xl md:text-4xl font-extrabold"></div>
+            </div>
+            <button id="setDateBtn" class="text-sm px-3 py-2 rounded-xl bg-white/10 hover:bg-white/20">Set Date</button>
+          </div>
+        </div>
+        <div class="relative">
+          <div class="absolute -inset-6 bg-gradient-to-tr from-[var(--rose)]/20 to-[var(--gold)]/10 blur-3xl rounded-[3rem]"></div>
+          <div class="relative glass rounded-[2rem] p-6 border border-white/20">
+            <div class="aspect-[4/5] rounded-[1.5rem] overflow-hidden">
+              <img id="heroPhoto" src="p.jpeg" alt="Birthday" class="w-full h-full object-cover">
+            </div>
+            <p class="mt-4 text-center fancy text-3xl text-[var(--gold)]">Gorgeous then. Gorgeous now. 💃</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+      <div id="photoGrid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"></div>
+    </div>
+  </section>
+
+  <!-- Lightbox Modal -->
+  <div id="lightbox" class="fixed inset-0 bg-black/80 hidden items-center justify-center z-50">
+    <button id="closeLightbox" class="absolute top-5 right-5 bg-white/10 hover:bg-white/20 rounded-full p-2">✕</button>
+    <img id="lightboxImg" src="" alt="" class="max-w-[92vw] max-h-[86vh] rounded-2xl shadow-2xl fade-in" />
+  </div>
+  <!-- Footer -->
+  <footer class="py-12 text-center text-white/60">
+    <p>Built with love for <span class="fancy text-[var(--rose)]">Her</span> — still shining brighter than ever ✨</p>
+  </footer>
+
+  <!-- Hidden Audio -->
+  <audio id="music" loop>
+    <source src="Ed_Sheeran_-_-_Thinking_Out_Loud.mp3" type="audio/mpeg" />
+  </audio>
+  <script>
+    /* ===== Utilities ===== */
+    const $ = sel => document.querySelector(sel);
+    const $$ = sel => Array.from(document.querySelectorAll(sel));
+
+    /* ===== Countdown ===== */
+    const countdownEl = document.getElementById('countdown');
+    const PARTY_KEY = 'partyDateISO';
+    function renderCountdown(){
+      const iso = localStorage.getItem(PARTY_KEY);
+      if(!iso){ countdownEl.textContent = 'Set your party date'; return; }
+      const target = new Date(iso);
+      const tick = () => {
+        const now = new Date();
+        const diff = Math.max(0, target - now);
+        const d = Math.floor(diff / (1000*60*60*24));
+        const h = Math.floor((diff/(1000*60*60)) % 24);
+        const m = Math.floor((diff/(1000*60)) % 60);
+        const s = Math.floor((diff/1000) % 60);
+        countdownEl.textContent = `${d}d ${h}h ${m}m ${s}s`;
+      };
+      tick();
+      clearInterval(window._cdInt);
+      window._cdInt = setInterval(tick, 1000);
+    }
+    renderCountdown();
+    document.getElementById('setDateBtn').addEventListener('click',()=>{
+      const val = prompt('Enter party date/time (e.g., 2025-12-24 19:00)');
+      if(!val) return;
+      const iso = new Date(val.replace(' ', 'T')); // quick parse
+      if(isNaN(iso)) { alert('Invalid date'); return; }
+      localStorage.setItem(PARTY_KEY, iso.toISOString());
+      renderCountdown();
+      boom();
+    });
+
+     
+    // Lightbox
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const closeLightbox = document.getElementById('closeLightbox');
+    photoGrid.addEventListener('click', (e)=>{
+      const img = e.target.closest('img');
+      if(!img) return;
+      document.body.classList.add('lightbox-open');
+      lightboxImg.src = img.dataset.full || img.src;
+      lightbox.classList.remove('hidden');
+    });
+    closeLightbox.addEventListener('click', ()=>{ lightbox.classList.add('hidden'); document.body.classList.remove('lightbox-open'); });
+    lightbox.addEventListener('click', (e)=>{ if(e.target === lightbox){ closeLightbox.click(); } });
+
+    /* ===== Music ===== */
+    const music = document.getElementById('music');
+    const musicBtn = document.getElementById('musicBtn');
+    let playing = false;
+    musicBtn.addEventListener('click', async ()=>{
+      try{
+        if(!playing){ await music.play(); playing = true; musicBtn.textContent = '❚❚ Pause'; boom(); }
+        else { music.pause(); playing = false; musicBtn.textContent = '♪ Music'; }
+      }catch(err){ alert('Browser blocked autoplay. Tap again to play.'); }
+    });
+
+    /* ===== Confetti ===== */
+    const c = document.getElementById('confetti');
+    const ctx = c.getContext('2d');
+    const DPR = Math.max(1, Math.min(2, window.devicePixelRatio||1));
+    let W, H, confettis = [];
+    function resize(){ W = c.width = innerWidth*DPR; H = c.height = innerHeight*DPR; }
+    addEventListener('resize', resize); resize();
+    function addConfetti(x, y, n=120){
+      for(let i=0;i<n;i++){
+        confettis.push({
+          x: x*DPR, y: y*DPR,
+          vx: (Math.random()-0.5)*6*DPR,
+          vy: (Math.random()-1.2)*7*DPR,
+          s: Math.random()*6+3,
+          a: Math.random()*Math.PI,
+          life: 120+Math.random()*60,
+          hue: Math.random()*360
+        });
+      }
+    }
+    function draw(){
+      ctx.clearRect(0,0,W,H);
+      confettis.forEach(p=>{
+        p.vy += 0.15*DPR; p.x += p.vx; p.y += p.vy; p.a += 0.2; p.life -= 1;
+        ctx.save();
+        ctx.translate(p.x, p.y); ctx.rotate(p.a);
+        ctx.fillStyle = `hsl(${p.hue},90%,60%)`;
+        ctx.fillRect(-p.s/2, -p.s/2, p.s, p.s*0.6);
+        ctx.restore();
+      });
+      confettis = confettis.filter(p=> p.life>0 && p.y < H+50*DPR);
+      requestAnimationFrame(draw);
+    }
+    draw();
+    function boom(x=innerWidth/2, y=innerHeight/2){ addConfetti(x,y); }
+    document.addEventListener('click', (e)=>{ if(!e.target.closest('#musicBtn')) addConfetti(e.clientX, e.clientY, 80); });
+
+    /* ===== Sparkling Cursor ===== */
+    const sparkWrap = document.getElementById('sparkles');
+    let lastSpark = 0;
+    document.addEventListener('mousemove', (e)=>{
+      const now = performance.now();
+      if(now - lastSpark < 20) return; // throttle
+      lastSpark = now;
+      const sp = document.createElement('span');
+      sp.className = 'sparkle';
+      sp.style.left = (e.clientX - 4) + 'px';
+      sp.style.top = (e.clientY - 4) + 'px';
+      sp.style.background = `radial-gradient(circle, #fff, var(--gold))`;
+      sparkWrap.appendChild(sp);
+      setTimeout(()=> sp.remove(), 500);
+    });
+
+    /* ===== Balloons ===== */
+    const balloonColors = ['#ff6b9a','#ffd166','#7bdff2','#caa7ff','#a9f0d1'];
+    function makeBalloon(){
+      const b = document.createElement('div');
+      b.className = 'balloon';
+      b.style.left = Math.random()*100 + 'vw';
+      const size = 40 + Math.random()*28;
+      b.style.width = size+'px'; b.style.height = size*1.25+'px';
+      b.style.borderRadius = '50% 50% 50% 50% / 60% 60% 40% 40%';
+      b.style.background = balloonColors[Math.floor(Math.random()*balloonColors.length)];
+      b.style.opacity = .8;
+      document.getElementById('balloons').appendChild(b);
+      setTimeout(()=> b.remove(), 15000);
+    }
+    setInterval(makeBalloon, 1200);
+    for(let i=0;i<8;i++) makeBalloon();
+
+    /* ===== Helpers ===== */
+    function fileToDataURL(file){
+      return new Promise((res, rej)=>{ const r = new FileReader(); r.onload = ()=>res(r.result); r.onerror = rej; r.readAsDataURL(file); });
+    }
+    function escapeHtml(str=''){
+      return str.replace(/[&<>'"]/g, c=>({ '&':'&amp;','<':'&lt;','>':'&gt;','\'':'&#39;','"':'&quot;' }[c]));
+    }
+    function toggleMenu() {
+    document.getElementById("navLinks").classList.toggle("hidden");
+  }
+  </script>
+</body>
+</html>
